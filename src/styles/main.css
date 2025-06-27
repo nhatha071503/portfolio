@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
+  font-weight: 400;
   overflow: hidden;
 }
 
@@ -29,6 +30,12 @@ body {
 .section-inner {
   text-align: center;
   animation: fadeSlide 0.6s ease both;
+}
+
+.section-inner h1 {
+  font-weight: 300;
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
 @keyframes fadeSlide {
@@ -87,7 +94,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: linear-gradient(135deg, #e66465, #9198e5);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   text-align: center;
 }
@@ -122,11 +129,36 @@ body {
 }
 
 .project-card {
+  position: relative;
+  overflow: hidden;
   background: #fafafa;
   padding: 1rem;
   border-radius: 4px;
   text-align: left;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.project-content {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.project-card:hover::after {
+  opacity: 1;
 }
 
 .project-link {
@@ -175,4 +207,133 @@ body {
 
 .thank-you {
   font-size: 1.2rem;
+}
+
+/* Section backgrounds */
+#home {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+#about {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  color: #fff;
+}
+
+#skills {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+}
+
+#projects {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: #fff;
+}
+
+#contact {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+/* Skills section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.skill-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #fff;
+}
+
+.progress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  border-radius: 3px;
+}
+
+/* About section */
+.about-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 800px;
+}
+
+.about-image img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+/* Top progress bar */
+.top-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 20;
+}
+
+.top-progress-line {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Dots navigation */
+.dots-nav {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 20;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.dot.active {
+  background: #fff;
+  transform: scale(1.3);
 }
