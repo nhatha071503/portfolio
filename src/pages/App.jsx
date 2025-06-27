@@ -3,6 +3,10 @@ import HorizontalScroller from '../components/HorizontalScroller';
 import Section from '../components/Section';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Hero from '../components/Hero';
+import ProjectCard from '../components/ProjectCard';
+import ContactForm from '../components/ContactForm';
+import projects from '../data/projects';
 
 export default function App() {
   return (
@@ -10,16 +14,20 @@ export default function App() {
       <Navbar />
       <HorizontalScroller>
         <Section id="home" title="Home">
-          <p>Welcome to my portfolio</p>
+          <Hero />
         </Section>
         <Section id="about" title="About">
           <p>About me section</p>
         </Section>
         <Section id="projects" title="Projects">
-          <p>Here are some projects</p>
+          <div className="project-grid">
+            {projects.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
         </Section>
         <Section id="contact" title="Contact">
-          <p>Contact me at email@example.com</p>
+          <ContactForm />
         </Section>
       </HorizontalScroller>
       <Footer />
