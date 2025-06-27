@@ -1,7 +1,8 @@
 # portfolio
 
-This project is a simple React portfolio scaffolded with Webpack. Follow the
-steps below to start the development server:
+This project is a simple React portfolio scaffolded with Webpack. It now uses
+**framer-motion** for smooth animations. Follow the steps below to start the
+development server:
 
 1. Install dependencies with `npm install`.
 2. Start the dev server with `npm start`.
