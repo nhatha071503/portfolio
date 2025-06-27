@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-const SECTIONS = ['home', 'about', 'skills', 'projects', 'contact'];
+const SECTIONS = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
 
 export default function Navbar({ onNavClick, defaultActive = 0 }) {
   const [activeIdx, setActiveIdx] = useState(defaultActive);

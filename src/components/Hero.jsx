@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="hero-inner">
         <h1>Hello, I'm Jane Doe</h1>
         <p className="tagline wave-underline glow-text">
-          Front-end Developer & Designer
+          Crafting delightful user experiences with React
         </p>
         <a className="cta sparkle-hover glow-border" href="#projects">
           View Projects
