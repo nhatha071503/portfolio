@@ -1,0 +1,115 @@
+.about-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-height: 60vh;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+}
+
+@media (max-width: 768px) {
+  .about-wrapper {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+}
+
+.about-image {
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.3);
+  border: 3px solid rgba(255,255,255,0.5);
+  transition: transform 0.5s cubic-bezier(.36,1.5,.64,1);
+}
+
+.about-image img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(.36,1.5,.64,1);
+  filter: drop-shadow(0 2px 16px #e0e7ef);
+}
+
+.avatar-glass:hover {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 8px 40px 0 rgba(55,108,197,0.16);
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.35);
+  border-radius: 18px;
+  box-shadow: 0 8px 40px 0 rgba(66, 133, 244, 0.13), 0 1.5px 8px 0 rgba(0,0,0,0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(180,190,255,0.19);
+  padding: 2.2rem 2rem;
+  max-width: 370px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  animation: glassPop 0.9s cubic-bezier(.5,1.3,.5,1) 1;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg,rgba(66,133,244,0.07),rgba(246,133,255,0.10));
+}
+
+.about-text h2 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  color: #304ffe;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 1.35rem;
+}
+
+.about-text p {
+  color: #252e48;
+  font-size: 1.09rem;
+  margin: 0;
+  line-height: 1.65;
+}
+
+.highlight-gradient {
+  display: inline-block;
+  background: linear-gradient(90deg, #7f53ac 0%, #657ced 60%, #43c6ac 100%);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Fancy animations */
+@keyframes glassPop {
+  0% {
+    transform: scale(0.92) translateY(24px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+.animated-fadein {
+  animation: fadein 1.3s cubic-bezier(.4,.7,.7,1);
+}
+@keyframes fadein {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1);}
+}
+.animated-slidein {
+  animation: slidein 1s cubic-bezier(.18,.82,.58,1.01);
+}
+@keyframes slidein {
+  from { transform: translateY(24px); opacity: 0;}
+  to { transform: translateY(0); opacity: 1;}
+}

@@ -1,17 +1,23 @@
-import React from 'react';
+import React from "react";
+import "../styles/components/About.css"; 
+
 export default function About() {
   return (
-    <div className="about-wrapper">
-      <div className="about-image">
+    <div className="about-wrapper animated-fadein">
+      <div className="about-image avatar-glass">
         <img
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFElEQVR42mP8/5+hP6MkwDiqAoAApC0H6ehvYQAAAABJRU5ErkJggg=="
           alt="Avatar"
         />
       </div>
-      <div className="about-text glass-card">
+      <div className="about-text glass-card animated-slidein">
+        <h2>About Me</h2>
         <p>
           Passionate front-end developer with a love for modern design and smooth
-          user experiences.
+          user experiences. <br />
+          <span className="highlight-gradient">
+            Creativity ✦ Performance ✦ User First
+          </span>
         </p>
       </div>
     </div>
