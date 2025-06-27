@@ -9,6 +9,7 @@ import About from '../components/About';
 import ProjectCard from '../components/ProjectCard';
 import ContactForm from '../components/ContactForm';
 import ProgressBar from '../components/ProgressBar';
+import Experience from '../components/Experience';
 import projects from '../data/projects';
 
 export default function App() {
@@ -41,6 +42,9 @@ export default function App() {
               <ProjectCard key={p.id} project={p} />
             ))}
           </div>
+        </Section>
+        <Section id="experience" title="Experience">
+          <Experience />
         </Section>
         <Section id="contact" title="Contact">
           <ContactForm />
