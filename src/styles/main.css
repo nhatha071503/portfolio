@@ -209,6 +209,11 @@ body {
   font-size: 1.2rem;
 }
 
+.error-message {
+  color: red;
+  margin-top: 0.5rem;
+}
+
 /* Section backgrounds */
 #home {
   background: linear-gradient(135deg, #667eea, #764ba2);
