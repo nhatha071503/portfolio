@@ -9,7 +9,6 @@ import About from '../components/About';
 import ProjectCard from '../components/ProjectCard';
 import ContactForm from '../components/ContactForm';
 import ProgressBar from '../components/ProgressBar';
-import DotsNav from '../components/DotsNav';
 import projects from '../data/projects';
 
 export default function App() {
@@ -47,7 +46,6 @@ export default function App() {
           <ContactForm />
         </Section>
       </HorizontalScroller>
-      <DotsNav count={5} progress={progress} onDotClick={scrollTo} />
       <Footer />
     </div>
   );
