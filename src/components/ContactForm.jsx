@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -49,3 +50,5 @@ export default function ContactForm() {
     </form>
   );
 }
+
+ContactForm.propTypes = {};

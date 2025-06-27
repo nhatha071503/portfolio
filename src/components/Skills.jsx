@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const skills = [
   { name: 'HTML/CSS', level: 80 },
@@ -24,3 +25,5 @@ export default function Skills() {
     </div>
   );
 }
+
+Skills.propTypes = {};

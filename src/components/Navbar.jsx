@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Navbar({ onNavClick }) {
   const sections = ['home', 'about', 'skills', 'projects', 'contact'];
@@ -24,3 +25,11 @@ export default function Navbar({ onNavClick }) {
     </nav>
   );
 }
+
+Navbar.propTypes = {
+  onNavClick: PropTypes.func
+};
+
+Navbar.defaultProps = {
+  onNavClick: undefined
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Hero() {
   return (
@@ -11,3 +12,5 @@ export default function Hero() {
     </section>
   );
 }
+
+Hero.propTypes = {};
