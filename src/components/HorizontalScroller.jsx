@@ -4,11 +4,12 @@ import React, {
   forwardRef,
   useImperativeHandle
 } from 'react';
+import PropTypes from 'prop-types';
 import '../styles/main.css';
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-function HorizontalScroller({ children, onProgress }, ref) {
+function HorizontalScrollerImpl({ children, onProgress }, ref) {
   const wrapperRef = useRef(null);
   const scrollRef = useRef(0);
   const maxScroll = useRef(0);
@@ -74,4 +75,15 @@ function HorizontalScroller({ children, onProgress }, ref) {
   );
 }
 
-export default forwardRef(HorizontalScroller);
+const HorizontalScroller = forwardRef(HorizontalScrollerImpl);
+
+HorizontalScroller.propTypes = {
+  children: PropTypes.node,
+  onProgress: PropTypes.func
+};
+
+HorizontalScroller.defaultProps = {
+  onProgress: undefined
+};
+
+export default HorizontalScroller;

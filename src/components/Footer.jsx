@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Footer() {
   return (
@@ -7,3 +8,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+Footer.propTypes = {};
