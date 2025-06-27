@@ -11,7 +11,7 @@ export default function About() {
         />
       </div>
       <div className="about-text glass-card animated-slidein">
-        <h2>About Me</h2>
+        <h2 className="wave-underline">About Me</h2>
         <p>
           Passionate front-end developer with a love for modern design and smooth
           user experiences. <br />

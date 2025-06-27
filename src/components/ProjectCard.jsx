@@ -9,7 +9,7 @@ export default function ProjectCard({ project }) {
         {project.link && (
           <a
             href={project.link}
-            className="project-link"
+            className="project-link sparkle-hover glow-border"
             target="_blank"
             rel="noreferrer"
           >
