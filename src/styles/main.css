@@ -215,26 +215,10 @@ body {
 }
 
 /* Section backgrounds */
-#home {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-}
-
-#about {
-  background: linear-gradient(135deg, #f093fb, #f5576c);
-  color: #fff;
-}
-
-#skills {
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: #fff;
-}
-
-#projects {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: #fff;
-}
-
+#home,
+#about,
+#skills,
+#projects,
 #contact {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: #fff;
@@ -268,7 +252,7 @@ body {
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(135deg, #f093fb, #f5576c);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 3px;
 }
 
@@ -312,33 +296,9 @@ body {
 .top-progress-line {
   height: 100%;
   width: 100%;
-  background: linear-gradient(135deg, #f093fb, #f5576c);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   transform-origin: left;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
 
-/* Dots navigation */
-.dots-nav {
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.5rem;
-  z-index: 20;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.dot.active {
-  background: #fff;
-  transform: scale(1.3);
-}
