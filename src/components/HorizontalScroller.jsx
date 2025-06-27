@@ -1,9 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  forwardRef,
+  useImperativeHandle
+} from 'react';
 import '../styles/main.css';
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-export default function HorizontalScroller({ children }) {
+function HorizontalScroller({ children, onProgress }, ref) {
   const wrapperRef = useRef(null);
   const scrollRef = useRef(0);
   const maxScroll = useRef(0);
@@ -25,6 +30,12 @@ export default function HorizontalScroller({ children }) {
         maxScroll.current
       );
       wrapper.style.transform = `translateX(-${scrollRef.current}px)`;
+      if (onProgress) {
+        const progress = maxScroll.current
+          ? scrollRef.current / maxScroll.current
+          : 0;
+        onProgress(progress);
+      }
     };
 
     wrapper.addEventListener('wheel', onWheel, { passive: false });
@@ -34,6 +45,26 @@ export default function HorizontalScroller({ children }) {
     };
   }, []);
 
+  useImperativeHandle(ref, () => ({
+    scrollTo(index) {
+      scrollRef.current = clamp(
+        index * window.innerWidth,
+        0,
+        maxScroll.current
+      );
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        wrapper.style.transform = `translateX(-${scrollRef.current}px)`;
+        if (onProgress) {
+          const progress = maxScroll.current
+            ? scrollRef.current / maxScroll.current
+            : 0;
+          onProgress(progress);
+        }
+      }
+    }
+  }));
+
   return (
     <div className="horizontal-viewport">
       <div className="horizontal-wrapper" ref={wrapperRef}>
@@ -42,3 +73,5 @@ export default function HorizontalScroller({ children }) {
     </div>
   );
 }
+
+export default forwardRef(HorizontalScroller);
