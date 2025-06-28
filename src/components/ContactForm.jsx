@@ -55,7 +55,9 @@ export default function ContactForm() {
           required
         />
       </label>
-      <button type="submit">Send</button>
+      <button type="submit" className="sparkle-hover glow-border">
+        Send
+      </button>
       {status === 'error' && (
         <p className="error-message">There was a problem sending your message.</p>
       )}
