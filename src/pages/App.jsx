@@ -22,6 +22,9 @@ export default function App() {
     }
   };
 
+  const featuredProjects = projects.filter(p => p.featured);
+  const otherProjects = projects.filter(p => !p.featured);
+
   return (
     <div>
       <Navbar onNavClick={scrollTo} />
@@ -37,10 +40,26 @@ export default function App() {
           <Skills />
         </Section>
         <Section id="projects" title="Projects">
-          <div className="project-grid">
-            {projects.map((p) => (
-              <ProjectCard key={p.id} project={p} />
-            ))}
+          <div className="projects-container">
+            <div className="projects-intro">
+              <h3>Featured Projects</h3>
+              <p>A selection of my most impactful work</p>
+            </div>
+            
+            <div className="featured-projects">
+              {featuredProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} featured={true} />
+              ))}
+            </div>
+
+            <div className="other-projects">
+              <h4>More Projects</h4>
+              <div className="project-grid">
+                {otherProjects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
+              </div>
+            </div>
           </div>
         </Section>
         <Section id="experience" title="Experience">
