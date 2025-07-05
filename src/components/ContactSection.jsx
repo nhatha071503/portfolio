@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function ContactSection() {
+export default function ContactSection({ sectionIndex, mousePosition, isActive }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -8,6 +8,16 @@ export default function ContactSection() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [animationStage, setAnimationStage] = useState(0);
+
+  useEffect(() => {
+    if (isActive) {
+      const stages = [1, 2, 3];
+      stages.forEach((stage, index) => {
+        setTimeout(() => setAnimationStage(stage), index * 200);
+      });
+    }
+  }, [isActive]);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -27,26 +37,31 @@ export default function ContactSection() {
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
+  const parallaxStyle = {
+    transform: `translate3d(${mousePosition?.x * 0.01 || 0}px, ${mousePosition?.y * 0.01 || 0}px, 0)`
+  };
+
   return (
-    <section className="contact-section">
-      <div className="contact-background">
-        <div className="bg-orb orb-1"></div>
-        <div className="bg-orb orb-2"></div>
-        <div className="bg-orb orb-3"></div>
+    <section className="contact-section" style={parallaxStyle}>
+      <div className="section-background">
+        <div className="contact-orb orb-1"></div>
+        <div className="contact-orb orb-2"></div>
+        <div className="contact-orb orb-3"></div>
       </div>
       
       <div className="contact-container">
         <div className="contact-info">
-          <h2 className="section-title">
-            Let's Create Something
-            <span className="gradient-text"> Amazing</span>
+          <h2 className={`section-title ${animationStage >= 1 ? 'animate-in' : ''}`}>
+            <span className="title-word">Let's Create</span>
+            <span className="title-word gradient-text">Something Amazing</span>
           </h2>
-          <p className="contact-description">
+          
+          <p className={`contact-description ${animationStage >= 1 ? 'animate-in' : ''}`}>
             Ready to bring your vision to life? Let's collaborate and build 
             extraordinary digital experiences together.
           </p>
           
-          <div className="contact-methods">
+          <div className={`contact-methods ${animationStage >= 2 ? 'animate-in' : ''}`}>
             <div className="contact-method">
               <div className="method-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -85,7 +100,7 @@ export default function ContactSection() {
           </div>
         </div>
         
-        <div className="contact-form-container">
+        <div className={`contact-form-container ${animationStage >= 3 ? 'animate-in' : ''}`}>
           <form className="contact-form glass-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Full Name</label>
@@ -151,6 +166,7 @@ export default function ContactSection() {
               <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               {isSubmitting && <div className="loading-spinner"></div>}
               <div className="btn-shine"></div>
+              <div className="btn-particles"></div>
             </button>
           </form>
         </div>

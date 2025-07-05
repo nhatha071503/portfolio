@@ -8,23 +8,16 @@ const SECTIONS = [
   { id: 'contact', label: 'Contact' }
 ];
 
-export default function Navbar({ onNavClick, defaultActive = 0 }) {
-  const [activeIdx, setActiveIdx] = useState(defaultActive);
+export default function Navbar({ onNavClick, activeSection = 0, scrollProgress = 0 }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    setIsScrolled(scrollProgress > 0.05);
+  }, [scrollProgress]);
 
   const handleClick = useCallback(
     (idx, e) => {
       e.preventDefault();
-      setActiveIdx(idx);
       if (onNavClick) onNavClick(idx);
     },
     [onNavClick]
@@ -34,7 +27,9 @@ export default function Navbar({ onNavClick, defaultActive = 0 }) {
     <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-brand">
         <div className="brand-logo">
-          <div className="logo-icon"></div>
+          <div className="logo-icon">
+            <div className="logo-inner"></div>
+          </div>
           <span className="brand-text">Portfolio</span>
         </div>
       </div>
@@ -44,7 +39,7 @@ export default function Navbar({ onNavClick, defaultActive = 0 }) {
           <li key={section.id} className="navbar-item">
             <a
               href={`#${section.id}`}
-              className={`navbar-link ${activeIdx === idx ? 'active' : ''}`}
+              className={`navbar-link ${activeSection === idx ? 'active' : ''}`}
               onClick={(e) => handleClick(idx, e)}
             >
               <span className="link-text">{section.label}</span>
@@ -54,6 +49,13 @@ export default function Navbar({ onNavClick, defaultActive = 0 }) {
           </li>
         ))}
       </ul>
+      
+      <div className="navbar-progress">
+        <div 
+          className="progress-line" 
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
+      </div>
       
       <div className="navbar-cta">
         <button className="hire-btn magnetic-btn">

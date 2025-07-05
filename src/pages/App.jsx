@@ -1,28 +1,36 @@
 import React, { useRef, useState, useEffect } from 'react';
+import HorizontalScroller from '../components/HorizontalScroller';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import ProjectShowcase from '../components/ProjectShowcase';
+import ProjectsSection from '../components/ProjectsSection';
+import AboutSection from '../components/AboutSection';
+import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
 
 export default function App() {
+  const scrollerRef = useRef(null);
   const [currentSection, setCurrentSection] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     // Add magnetic effect to buttons
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     
     magneticBtns.forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
+      const handleMouseMove = (e) => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         
-        btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-      });
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+      };
       
-      btn.addEventListener('mouseleave', () => {
+      const handleMouseLeave = () => {
         btn.style.transform = 'translate(0, 0)';
-      });
+      };
+
+      btn.addEventListener('mousemove', handleMouseMove);
+      btn.addEventListener('mouseleave', handleMouseLeave);
     });
 
     // Cleanup
@@ -32,34 +40,41 @@ export default function App() {
         btn.removeEventListener('mouseleave', () => {});
       });
     };
-  }, []);
+  }, [currentSection]);
 
   const scrollToSection = (index) => {
-    const sections = ['home', 'projects', 'about', 'skills', 'contact'];
-    const element = document.getElementById(sections[index]);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setCurrentSection(index);
+    if (scrollerRef.current) {
+      scrollerRef.current.scrollTo(index);
     }
+  };
+
+  const handleSectionChange = (index) => {
+    setCurrentSection(index);
+  };
+
+  const handleProgress = (progress) => {
+    setScrollProgress(progress);
   };
 
   return (
     <div className="app">
-      <Navbar onNavClick={scrollToSection} defaultActive={currentSection} />
+      <Navbar 
+        onNavClick={scrollToSection} 
+        activeSection={currentSection}
+        scrollProgress={scrollProgress}
+      />
       
-      <main>
-        <section id="home">
-          <Hero />
-        </section>
-        
-        <section id="projects">
-          <ProjectShowcase />
-        </section>
-        
-        <section id="contact">
-          <ContactSection />
-        </section>
-      </main>
+      <HorizontalScroller 
+        ref={scrollerRef} 
+        onProgress={handleProgress}
+        onSectionChange={handleSectionChange}
+      >
+        <Hero />
+        <ProjectsSection />
+        <AboutSection />
+        <SkillsSection />
+        <ContactSection />
+      </HorizontalScroller>
     </div>
   );
 }
