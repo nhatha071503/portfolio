@@ -1,75 +1,65 @@
-import React, { useRef, useState } from 'react';
-import HorizontalScroller from '../components/HorizontalScroller';
-import Section from '../components/Section';
+import React, { useRef, useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import Hero from '../components/Hero';
-import Skills from '../components/Skills';
-import About from '../components/About';
-import ProjectCard from '../components/ProjectCard';
-import ContactForm from '../components/ContactForm';
-import ProgressBar from '../components/ProgressBar';
-import Experience from '../components/Experience';
-import projects from '../data/projects';
+import ProjectShowcase from '../components/ProjectShowcase';
+import ContactSection from '../components/ContactSection';
 
 export default function App() {
-  const scrollerRef = useRef(null);
-  const [progress, setProgress] = useState(0);
+  const [currentSection, setCurrentSection] = useState(0);
 
-  const scrollTo = (idx) => {
-    if (scrollerRef.current) {
-      scrollerRef.current.scrollTo(idx);
+  useEffect(() => {
+    // Add magnetic effect to buttons
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Cleanup
+    return () => {
+      magneticBtns.forEach(btn => {
+        btn.removeEventListener('mousemove', () => {});
+        btn.removeEventListener('mouseleave', () => {});
+      });
+    };
+  }, []);
+
+  const scrollToSection = (index) => {
+    const sections = ['home', 'projects', 'about', 'skills', 'contact'];
+    const element = document.getElementById(sections[index]);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setCurrentSection(index);
     }
   };
 
-  const featuredProjects = projects.filter(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured);
-
   return (
-    <div>
-      <Navbar onNavClick={scrollTo} />
-      <ProgressBar progress={progress} />
-      <HorizontalScroller ref={scrollerRef} onProgress={setProgress}>
-        <Section id="home" title="Home">
+    <div className="app">
+      <Navbar onNavClick={scrollToSection} defaultActive={currentSection} />
+      
+      <main>
+        <section id="home">
           <Hero />
-        </Section>
-        <Section id="about" title="About">
-          <About />
-        </Section>
-        <Section id="skills" title="Skills">
-          <Skills />
-        </Section>
-        <Section id="projects" title="Projects">
-          <div className="projects-container">
-            <div className="projects-intro">
-              <h3>Featured Projects</h3>
-              <p>A selection of my most impactful work</p>
-            </div>
-            
-            <div className="featured-projects">
-              {featuredProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} featured={true} />
-              ))}
-            </div>
-
-            <div className="other-projects">
-              <h4>More Projects</h4>
-              <div className="project-grid">
-                {otherProjects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </Section>
-        <Section id="experience" title="Experience">
-          <Experience />
-        </Section>
-        <Section id="contact" title="Contact">
-          <ContactForm />
-        </Section>
-      </HorizontalScroller>
-      <Footer />
+        </section>
+        
+        <section id="projects">
+          <ProjectShowcase />
+        </section>
+        
+        <section id="contact">
+          <ContactSection />
+        </section>
+      </main>
     </div>
   );
 }

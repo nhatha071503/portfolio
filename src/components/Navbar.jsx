@@ -1,11 +1,26 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
-const SECTIONS = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+const SECTIONS = [
+  { id: 'home', label: 'Home' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' }
+];
 
 export default function Navbar({ onNavClick, defaultActive = 0 }) {
   const [activeIdx, setActiveIdx] = useState(defaultActive);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Dùng useCallback để tránh tạo mới hàm ở mỗi lần render
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleClick = useCallback(
     (idx, e) => {
       e.preventDefault();
@@ -16,30 +31,36 @@ export default function Navbar({ onNavClick, defaultActive = 0 }) {
   );
 
   return (
-    <nav className="navbar" aria-label="Main navigation">
-      <ul className="navbar__list">
-        {SECTIONS.map((sec, idx) => (
-          <li
-            key={sec}
-            className={`navbar__item${activeIdx === idx ? ' navbar__item--active' : ''}`}
-          >
+    <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+      <div className="navbar-brand">
+        <div className="brand-logo">
+          <div className="logo-icon"></div>
+          <span className="brand-text">Portfolio</span>
+        </div>
+      </div>
+      
+      <ul className="navbar-menu">
+        {SECTIONS.map((section, idx) => (
+          <li key={section.id} className="navbar-item">
             <a
-              href={`#${sec}`}
-              className="navbar__link"
-              aria-current={activeIdx === idx ? 'page' : undefined}
-              tabIndex={0}
+              href={`#${section.id}`}
+              className={`navbar-link ${activeIdx === idx ? 'active' : ''}`}
               onClick={(e) => handleClick(idx, e)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  handleClick(idx, e);
-                }
-              }}
             >
-              {sec.charAt(0).toUpperCase() + sec.slice(1)}
+              <span className="link-text">{section.label}</span>
+              <div className="link-underline"></div>
+              <div className="link-glow"></div>
             </a>
           </li>
         ))}
       </ul>
+      
+      <div className="navbar-cta">
+        <button className="hire-btn magnetic-btn">
+          <span>Hire Me</span>
+          <div className="btn-particles"></div>
+        </button>
+      </div>
     </nav>
   );
 }
