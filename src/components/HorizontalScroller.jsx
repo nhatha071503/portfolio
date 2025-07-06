@@ -67,19 +67,6 @@ function HorizontalScroller({ children, onProgress, onSectionChange }, ref) {
 
     // Enhanced wheel handling with momentum
     const onWheel = (e) => {
-      const section = e.target.closest(
-        '.hero-section, .projects-section, .about-section, .skills-section, .contact-section'
-      );
-      if (section && section.scrollHeight > section.clientHeight) {
-        const atTop = section.scrollTop === 0;
-        const atBottom =
-          section.scrollTop + section.clientHeight >= section.scrollHeight;
-        if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
-          // Allow vertical scrolling inside the section
-          return;
-        }
-      }
-
       e.preventDefault();
       if (isScrolling.current) return;
 

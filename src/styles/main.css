@@ -278,11 +278,10 @@ body {
 .skills-section,
 .contact-section {
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   flex-shrink: 0;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
