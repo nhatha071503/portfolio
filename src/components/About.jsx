@@ -6,10 +6,10 @@ export default function About() {
       <div className="about-image">
         <img
           src="https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400"
-          alt="Sarah Chen - Frontend Developer"
+          alt="Phước Hà - Frontend Developer"
         />
         <div className="about-image-overlay">
-          <div className="experience-badge">5+ Years</div>
+          <div className="experience-badge">1+ Years</div>
         </div>
       </div>
       <div className="about-content">
@@ -17,7 +17,7 @@ export default function About() {
           <h2 className="wave-underline">About Me</h2>
           <p className="about-intro">
             I'm a passionate frontend developer who believes that great design and clean code go hand in hand. 
-            With over 5 years of experience, I've helped startups and established companies create digital products 
+            With over 2 years of experience, I've helped startups and established companies create digital products 
             that users love.
           </p>
           
