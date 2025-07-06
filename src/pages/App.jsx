@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import HorizontalScroller from '../components/HorizontalScroller';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -42,19 +42,19 @@ export default function App() {
     };
   }, [currentSection]);
 
-  const scrollToSection = (index) => {
+  const scrollToSection = useCallback((index) => {
     if (scrollerRef.current) {
       scrollerRef.current.scrollTo(index);
     }
-  };
+  }, []);
 
-  const handleSectionChange = (index) => {
+  const handleSectionChange = useCallback((index) => {
     setCurrentSection(index);
-  };
+  }, []);
 
-  const handleProgress = (progress) => {
+  const handleProgress = useCallback((progress) => {
     setScrollProgress(progress);
-  };
+  }, []);
 
   return (
     <div className="app">
