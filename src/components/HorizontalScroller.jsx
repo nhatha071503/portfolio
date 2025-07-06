@@ -67,13 +67,14 @@ function HorizontalScroller({ children, onProgress, onSectionChange }, ref) {
 
     // Enhanced wheel handling with momentum
     const onWheel = (e) => {
+
       e.preventDefault();
       if (isScrolling.current) return;
-      
+
       isScrolling.current = true;
       const delta = e.deltaY;
       const sensitivity = 0.8;
-      
+
       if (Math.abs(delta) > 10) {
         if (delta > 0) {
           currentIndex.current = clamp(
@@ -88,13 +89,13 @@ function HorizontalScroller({ children, onProgress, onSectionChange }, ref) {
             pageCount.current - 1
           );
         }
-        
+
         targetScrollRef.current = currentIndex.current * window.innerWidth;
-        
+
         if (onSectionChange) {
           onSectionChange(currentIndex.current);
         }
-        
+
         animationFrameRef.current = requestAnimationFrame(animateScroll);
       }
     };
